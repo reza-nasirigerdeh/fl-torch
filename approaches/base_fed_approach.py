@@ -57,7 +57,7 @@ class BaseFedApproach:
         num_workers = train_config['num_workers']
         self.test_loader = torch.utils.data.DataLoader(dataset=self.test_dataset, batch_size=100, shuffle=False,
                                                        num_workers=num_workers)
-        self.test_size = len(dataset.test_set)
+        self.test_size = len(self.test_dataset)
 
         # extend model config
         model_config['num_classes'] = num_classes
