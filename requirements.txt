@@ -1,0 +1,5 @@
+torch==1.10.1+cu111
+torchvision==0.11.2+cu111
+torchsummary==1.5.1
+numpy==1.21.5
+wget==3.2
