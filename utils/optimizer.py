@@ -24,8 +24,6 @@ def get_optimizer(optimizer_name, model_params, learning_rate, momentum=0.0, wei
     if optimizer_name == 'sgd':
         return optim.SGD(params=model_params, lr=learning_rate, momentum=momentum, weight_decay=weight_decay,
                          dampening=dampening, nesterov=nesterov)
-    elif optimizer_name == 'adam':
-        return optim.Adam(params=model_params, lr=learning_rate)
     else:
         logger.error(f"No implementation is available for {optimizer_name}!")
         logger.error("You can add the corresponding implementation to get_optimizer in utils/optimizer.py")
