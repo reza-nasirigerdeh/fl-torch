@@ -126,12 +126,12 @@ pip3 install -r requirements.txt  -f https://download.pytorch.org/whl/torch_stab
 | log level (e.g. debug)                                          | --log-level debug    |
 # Run
 **Example1**: Use FedAvg to train  non-normalized version of VGG-6 on CIFAR-10 with cross-entropy loss function, SGD optimizer
-with learning rate of 0.025, and batch size of 32 for 100 communication rounds, in a cross-silo federated environment
+with learning rate of 0.005, and batch size of 32 for 100 communication rounds, in a cross-silo federated environment
 with 10 clients, 2 labels per client (highly non-iid), and balanced sample size distribution:
 
 ```
 python3 simulate.py --approach fedavg --dataset cifar10 --model vgg6_nn --optimizer sgd --momentum 0.0 \
-                    --loss cross_entropy --learning-rate 0.025 --batch-size 32 --rounds 100 \
+                    --loss cross_entropy --learning-rate 0.005 --batch-size 32 --rounds 100 \
                     --clients 10 --classes-per-client 2 --balance-degree 1.0
                     
 ```

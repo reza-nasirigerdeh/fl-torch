@@ -33,7 +33,6 @@ class FedAvgClient(BaseApproach):
 
         self.num_local_epochs = train_config['num_local_epochs']
         self.sample_size = len(train_dataset)
-        print(self.sample_size)
         self.acc_grads = None  # accumulated gradients, which is reinitialized and updated in compute_client_grads
         self.old_grads = None  # used if momentum is non-zero, which is reinitialized and updated in compute_client_grads
 
