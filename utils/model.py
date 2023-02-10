@@ -36,8 +36,6 @@ logger = logging.getLogger("model")
 
 def build_model(model_name, num_classes, group_size=32):
 
-    logger.info(f"Building model {model_name} ...")
-
     # ##### Simple fully-connected model
     if model_name == 'fnn':
         model = FNN(num_classes=num_classes)
