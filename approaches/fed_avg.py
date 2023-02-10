@@ -87,8 +87,6 @@ class FedAvgApproach(BaseFedApproach):
                                              train_config=train_config, model_config=model_config,
                                              loss_func_config=loss_func_config, optimizer_config=optimizer_config)
         self.learning_rate = optimizer_config['learning_rate']
-        self.server_momentum = optimizer_config['server_momentum']
-        self.server_weight_decay = optimizer_config['server_weight_decay']
         self.old_grads = {name: 0.0 for name, parameter in self.global_model.named_parameters()}
 
     def train_model(self):
@@ -126,8 +124,8 @@ class FedAvgApproach(BaseFedApproach):
         # update the global model
         with torch.no_grad():
             for param_name, param_value in self.global_model.named_parameters():
-                final_grad = self.server_momentum * self.old_grads[param_name] + global_grad_dict[param_name]
-                param_value -= (self.learning_rate * final_grad + self.learning_rate * self.server_weight_decay * param_value)
+                final_grad = global_grad_dict[param_name]
+                param_value -= self.learning_rate * final_grad
                 self.old_grads[param_name] = final_grad
 
         # self.global_model = self.global_model.to(self.device, dtype=torch.float64)
