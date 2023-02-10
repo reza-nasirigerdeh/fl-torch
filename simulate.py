@@ -312,7 +312,7 @@ def main():
             # test model
             test_loss, test_accuracy = approach.evaluate_model()
 
-            logger.info(f'Train loss: {train_loss:.6f}, Train accuracy: {train_accuracy:.6f}')
+            # logger.info(f'Train loss: {train_loss:.6f}, Train accuracy: {train_accuracy:.6f}')
             logger.info(f'Test loss: {test_loss:.6f}, Test accuracy: {test_accuracy:.6f}')
 
             # write result
