@@ -226,8 +226,8 @@ def main():
 
     model_str = args.model_name + (f'-gs{args.group_size}' if 'gn' in args.model_name else "")
 
-    optimizer_str = args.optimizer_name + (f'-m{args.momentum}-sm{args.server_momentum}' if (args.optimizer_name == 'sgd') else "") + \
-                    f'-wd{args.weight_decay}' + f'-swd{args.server_weight_decay}' + f'-dmp{args.dampening}' + ('-nesterov' if args.nesterov else "") + f"-lr{args.learning_rate}"
+    optimizer_str = args.optimizer_name + (f'-m{args.momentum}' if (args.optimizer_name == 'sgd') else "") + \
+                    f'-wd{args.weight_decay}' + f'-dmp{args.dampening}' + ('-nesterov' if args.nesterov else "") + f"-lr{args.learning_rate}"
 
     loss_func_str = args.loss_function_name
 
