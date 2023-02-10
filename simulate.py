@@ -132,7 +132,7 @@ def main():
 
     parser.add_argument("--num_comm_rounds", "--rounds", type=int, help="number of communication rounds", default=100)
 
-    parser.add_argument("--eval_freq", "--eval-freq", type=int, help="evaluate model every eval-freq rounds", default=50)
+    parser.add_argument("--eval_freq", "--eval-freq", type=int, help="evaluate model every eval-freq rounds", default=1)
 
     parser.add_argument("--log_level", "--log-level", type=str, help="log level",
                         default=logging.getLevelName(logging.INFO),
