@@ -95,6 +95,15 @@ pip3 install -r requirements.txt  -f https://download.pytorch.org/whl/torch_stab
 **Example2**: ResNet50 with group normalization --> --model resnet50_gn \
 **Example3**: PreactResNet34 with layer normalization --> --model preact_resnet34_ln 
 
+### Training algorithm
+| Description                     | option            |
+|:--------------------------------|:------------------|
+| Federated averaging             | --approach fedavg |
+| number of local epochs (e.g. 1) | --local-epochs 1  |
+
+
+
+
 ### Federated setting
 | Description                                                                   | option                 |
 |:------------------------------------------------------------------------------|:-----------------------|
@@ -112,22 +121,22 @@ pip3 install -r requirements.txt  -f https://download.pytorch.org/whl/torch_stab
 | run number to have a separate result file for each run (e.g. 1) | --run 1              |
 | log level (e.g. debug)                                          | --log-level debug    |
 # Run
-**Example1**: Train batch normalized version of VGG-6 on CIFAR-10 with cross-entropy loss function, SGD optimizer
+**Example1**: Use FedAvg to train batch normalized version of VGG-6 on CIFAR-10 with cross-entropy loss function, SGD optimizer
 with learning rate of 0.025 and momentum of 0.9, and batch size of 32 for 100 communication rounds, in a cross-silo federated environment
 with 10 clients, 2 labels per client (highly non-iid), and balanced sample size distribution:
 
 ```
-python3 simulate.py --dataset cifar10 --model vgg6_bn --optimizer sgd --momentum 0.9 \
+python3 simulate.py --approach fedavg --dataset cifar10 --model vgg6_bn --optimizer sgd --momentum 0.9 \
                     --loss cross_entropy --learning-rate 0.025 --batch-size 32 --rounds 100 \
                     --clients 10 --classes-per-client 2 --balance-degree 1.0
                     
 ```
 
 **Example2**: Train layer normalized version of ResNet-34 on imagenette-160-pixel with SGD optimizer, learning rate of 0.005, and batch size of 16 for 100 rounds. For preprocessing, apply random-resized-crop of shape 128x128 and random horizontal flipping to the train images, and resize test images to 160x160 first, and then, center crop them to 128x128, finally normalize them with the mean and std of imagenet.
-The cross-silo federated environment contains 5 clients, with 10 labels per client (IID), and balance degree of 0.75 (relatively imbalanced):
+The cross-silo federated environment contains 5 clients, with 10 labels per client (IID), and balance degree of 0.75 (relatively imbalanced). Training algorithm is FedAvg:
 
 ```
-python3 simulate.py --dataset imagenette_160px --random-hflip \
+python3 simulate.py --approach fedavg --dataset imagenette_160px --random-hflip \
                     --random-resized-crop 128x128 --resize-test 160x160 --center-crop 128x128  \
                     --norm-mean 0.485,0.456,0.406  --norm-std 0.229,0.224,0.225 \
                     --model resnet34_ln --optimizer sgd --momentum 0.0 \
@@ -135,11 +144,11 @@ python3 simulate.py --dataset imagenette_160px --random-hflip \
                     --clients 5 --classes-per-client 10 --balance-degree 0.75
 ```
 
-**Example3**: Train group normalized version of PreactResNet-18 with group size of 32 on CIFAR-100 with SGD optimizer, learning rate of 0.01, and batch size of 16 for 200 rounds. For preprocessing, apply random horizontal flipping and cropping with padding 4x4 to the images. Federated environment consists of 100 clients, 
+**Example3**: Employ FedAvg to train group normalized version of PreactResNet-18 with group size of 32 on CIFAR-100 with SGD optimizer, learning rate of 0.01, and batch size of 16 for 200 rounds. For preprocessing, apply random horizontal flipping and cropping with padding 4x4 to the images. Federated environment consists of 100 clients, 
 with 10 labels per client (highly non-iid), balanced sample distribution, and client selection rate of 0.2 (cross-device).
 
 ```
-python3 simulate.py --dataset cifar100 --random-crop 32x32-4x4 \
+python3 simulate.py --approach fedavg --dataset cifar100 --random-crop 32x32-4x4 \
                     --random-hflip --model preact_resnet18_gn --group-size 32  \
                     --optimizer sgd --learning-rate 0.01 \
                     --batch-size 16 --rounds 200 \
