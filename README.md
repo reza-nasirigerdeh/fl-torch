@@ -142,7 +142,6 @@ with 10 labels per client (highly non-iid), balanced sample distribution, and cl
 python3 simulate.py --dataset cifar100 --random-crop 32x32-4x4 \
                     --random-hflip --model preact_resnet18_gn --group-size 32  \
                     --optimizer sgd --learning-rate 0.01 \
-                    --lr-scheduler multi_step --decay-epochs 100,150 --decay-multiplier 0.1 \
                     --batch-size 16 --rounds 200 \
                     --clients 100 --classes-per-client 10 --balance-degree 1.0 --selection-rate 0.2
 ```
