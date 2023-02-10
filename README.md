@@ -13,6 +13,10 @@ Clone the fl-torch repository:
 ```
 git clone https://github.com/reza-nasirigerdeh/fl-torch
 ```
+or
+```
+git clone git@github.com:reza-nasirigerdeh/fl-torch.git
+```
 Install the dependencies:
 ```
 pip3 install -r requirements.txt  -f https://download.pytorch.org/whl/torch_stable.html
